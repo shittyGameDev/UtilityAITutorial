@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class Eat : MonoBehaviour
+[CreateAssetMenu(fileName = "Eat", menuName = "UtilityAI/Actions/Eat")]
+public class Eat : Action
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Execute(NPCController npc)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("I ate food!");
+        npc.OnFinishedAction();
     }
 }

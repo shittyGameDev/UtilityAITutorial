@@ -18,7 +18,16 @@ public class NPCController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(aiBrain.finishedDeciding)
+        {
+            aiBrain.finishedDeciding = false;
+            aiBrain.bestAction.Execute(this);
+        }
+    }
+
+    public void OnFinishedAction()
+    {
+        aiBrain.DecideBestAction(actionsAvailable);
     }
     
     #region Coroutines
@@ -26,6 +35,11 @@ public class NPCController : MonoBehaviour
     public void DoWork(int time)
     {
         StartCoroutine(WorkCoroutine(time));
+    }
+    
+    public void DoSleep(int time)
+    {
+        StartCoroutine(SleepCoroutine(time));
     }
     
     private IEnumerator WorkCoroutine(int time)
@@ -37,6 +51,19 @@ public class NPCController : MonoBehaviour
             counter--;
         }
         Debug.Log("Work done!");
+        OnFinishedAction();
+    }
+    
+    private IEnumerator SleepCoroutine(int time)
+    {
+        int counter = time;
+        while (counter > 0)
+        {
+            yield return new WaitForSeconds(1);
+            counter--;
+        }
+        Debug.Log("Sleep done!");
+        OnFinishedAction();
     }
 
     #endregion

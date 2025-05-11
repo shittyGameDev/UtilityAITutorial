@@ -4,6 +4,7 @@ public class AIBrain : MonoBehaviour
 {
     public Action bestAction { get; set; }
     private NPCController npcController;
+    public bool finishedDeciding { get; set; }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +16,10 @@ public class AIBrain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (bestAction is null)
+        {
+            DecideBestAction(npcController.actionsAvailable);
+        }
     }
 
     public void DecideBestAction(Action[] actionsAvailable)
@@ -32,6 +36,7 @@ public class AIBrain : MonoBehaviour
         }
         
         bestAction = actionsAvailable[nextBestIndex];
+        finishedDeciding = true;
     }
     
     public float ScoreAction(Action action)

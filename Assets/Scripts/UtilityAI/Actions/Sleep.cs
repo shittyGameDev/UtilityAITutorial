@@ -1,16 +1,10 @@
 using UnityEngine;
 
-public class Sleep : MonoBehaviour
+[CreateAssetMenu(fileName = "Sleep", menuName = "UtilityAI/Actions/Sleep")]
+public class Sleep : Action
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Execute(NPCController npc)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        npc.DoSleep(3);
     }
 }
