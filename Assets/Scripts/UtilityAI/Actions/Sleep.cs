@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class MoveController : MonoBehaviour
+public class Sleep : MonoBehaviour
 {
-    
-    private NaveMeshAgent agent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

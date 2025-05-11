@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour
@@ -5,7 +6,7 @@ public class NPCController : MonoBehaviour
     public MoveController mover { get; set; }
     
     public AIBrain aiBrain { get; set; }
-    public Actions[] actionsAvailable;
+    public Action[] actionsAvailable;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,4 +20,24 @@ public class NPCController : MonoBehaviour
     {
         
     }
+    
+    #region Coroutines
+
+    public void DoWork(int time)
+    {
+        StartCoroutine(WorkCoroutine(time));
+    }
+    
+    private IEnumerator WorkCoroutine(int time)
+    {
+        int counter = time;
+        while (counter > 0)
+        {
+            yield return new WaitForSeconds(1);
+            counter--;
+        }
+        Debug.Log("Work done!");
+    }
+
+    #endregion
 }
